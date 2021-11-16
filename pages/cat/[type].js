@@ -9,9 +9,18 @@ const Card = ({ key, text }) => {
   return <a key={key}>{text}</a>
 }
 
-const Type = ({ type: typeFromInitialProps, data: dataFromInitialProps }) => {
+const Type = ({
+  type: typeFromInitialProps,
+  data: dataFromInitialProps,
+  totalPages: totalPagesFromInitialProps
+}) => {
   const [type, setType] = useState(typeFromInitialProps)
   const [data, setData] = useState(dataFromInitialProps)
+  const [totalPages, setTotalPages] = useState(totalPagesFromInitialProps)
+
+  useEffect(() => {
+    setData(dataFromInitialProps)
+  }, [dataFromInitialProps])
 
   return (
     <div className={styles.container}>
@@ -32,7 +41,12 @@ const Type = ({ type: typeFromInitialProps, data: dataFromInitialProps }) => {
           })
         }
       </main>
-
+        {
+          [...Array(totalPages)].map((x,i) => {
+            const as = `/cat/${type}?page=${i+1}`
+            return <Link href={as}><a>{i+1}</a></Link>
+          })
+        }
       <Link href="/"><a>Back</a></Link>
 
       <footer className={styles.footer}>
@@ -43,18 +57,19 @@ const Type = ({ type: typeFromInitialProps, data: dataFromInitialProps }) => {
 }
 
 Type.getInitialProps = async ({ req, res, query }) => {
-  const { type } = query
-  const page = 0
+  const { type, page } = query
 
-  const response = await axios.get(`https://swapi.dev/api/${type}`)
+  const response = await axios.get(`https://swapi.dev/api/${type}/?page=${!page ? 1 : page}`)
       .then(res => res)
       .catch(err => err)
 
   const data = response.data.results
+  const totalPages = Math.ceil(response.data.count/10)
 
   return ({
     type: query.type,
-    data: data
+    data: data,
+    totalPages: totalPages
   })
 }
 
