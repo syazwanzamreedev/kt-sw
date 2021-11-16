@@ -12,9 +12,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Link href="/type/[type]" as="/type/films"><a>Films</a></Link>
-        <Link href="/type/[type]" as="/type/people"><a>People</a></Link>
-        <Link href="/type/[type]" as="/type/species"><a>Species</a></Link>
+        <Link href="/cat/[type]" as="/cat/films"><a>Films</a></Link>
+        <Link href="/cat/[type]" as="/cat/people"><a>People</a></Link>
+        <Link href="/cat/[type]" as="/cat/species"><a>Species</a></Link>
       </main>
 
       <footer className={styles.footer}>
