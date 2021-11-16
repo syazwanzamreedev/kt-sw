@@ -13,13 +13,13 @@ export default function Home() {
       </Head>
       <img src="https://www.logo.wine/a/logo/Star_Wars/Star_Wars-Logo.wine.svg" width="200"  alt="Star Wars logo" />
       <main className={styles.main}>
-        <div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           {
             types.map(d => {
               const as = `/cat/${d}`
               return (
                 <Link href="/cat/[type]" as={as}>
-                  <a style={{ padding: "20px" }}>{d.charAt(0).toUpperCase() + d.slice(1)}</a>
+                  <a style={{ textAlign: "center", padding: "20px" }}>{d.charAt(0).toUpperCase() + d.slice(1)}</a>
                 </Link>
               )
             })
