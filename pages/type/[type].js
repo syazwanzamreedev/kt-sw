@@ -1,8 +1,11 @@
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Home.module.css'
 
-export default function Home() {
+const Type = ({ type: typeFromInitialProps }) => {
+  const [type, setType] = useState(typeFromInitialProps)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,10 +15,10 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Link href="/type/[type]" as="/type/films"><a>Films</a></Link>
-        <Link href="/type/[type]" as="/type/people"><a>People</a></Link>
-        <Link href="/type/[type]" as="/type/species"><a>Species</a></Link>
+        {type}
       </main>
+
+      <Link href="/"><a>Back</a></Link>
 
       <footer className={styles.footer}>
         <a>SZ</a>
@@ -23,3 +26,13 @@ export default function Home() {
     </div>
   )
 }
+
+Type.getInitialProps = async ({ req, res, query }) => {
+  const { type } = query
+
+  return ({
+    type: query.type
+  })
+}
+
+export default Type
