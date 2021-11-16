@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import axios from 'axios'
-import { FiEdit, FiDelete } from 'react-icons/fi';
+import { FiDelete } from 'react-icons/fi';
 
 import styles from '../../styles/Home.module.css'
 
@@ -58,7 +58,7 @@ const Type = ({
   const handleAddItem = () => {
     const newItem =  prompt(`Add ${type}: `)
     const newData = [...data]
-    newData.unshift(type === "films" ? { title: newItem } : { name: newItem })
+    if (newItem.length > 0 && newItem.trim() !== "") newData.unshift(type === "films" ? { title: newItem } : { name: newItem })
 
     setData(newData)
   }

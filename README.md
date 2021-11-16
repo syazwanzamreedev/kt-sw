@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a simple Star Wars listing made by me.
 
 ## Getting Started
 
@@ -6,29 +6,31 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+You can:
+1. Select to see Star Wars films, people, species, starships, planets and vehicles listing. Click on any button in front page.
+2. To see more listing, click on the pagination button at the bottom.
+3. To edit current data, click on the text, it will then change to an input textfield. After done editing, click outside the textfield to blur the focus.
+4. To delete a particular item in the list, click delete button at the right of items text.
+5. To add new data, click Add new [type] at the top of the page. You will be prompted with a dialog, click OK when done.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Stack/pkg:
+1. ReactJS: library for building front end UIs
+2. NextJS: Framework to serve ReactJS app from server side i.e Server Side Rendering.
+3. Axios: HTTP client, to make API call.
+4. React icons: Well...icons for ReactJS.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+If I'm going to spend more time on this project, I would.
+1. Make real API calls to edit and delete listing. Since I can only make a GET request to https://swapi.dev/api, editing and deleting item in list was only a mock. It only alters the array in memory, not in real DB. However, if the API is available, it can easily be done since the foundation was there already.
+2. I will start with designing the UI first. A proper one, with bell and whistle. After that only I will start the development.
+3. I will use Material UI. I was about to use MUI in this project, but, since I don't have much time to configure it, I have to pass.
+4. At this level, I don't think redux is necessary but if the app grows I can see that redux might help.
+5. I will make a proper reusable components, plus with MUI in place, it is good to have it.
+6. I will display more data. Currently I only display names and titles. If we have the design to properly display the data, then I will definitely display more datas.
+7. I will use custom dialog plus modal instead of browsers dialog for user input.
+8. I will write tests.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This is an assignment given by Kakitangan.com.
