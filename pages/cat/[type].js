@@ -6,21 +6,33 @@ import axios from 'axios'
 import styles from '../../styles/Home.module.css'
 
 const Card = ({ key, text }) => { // create Card in components folder for reusability. Import here.
-  return <a style={{ paddingTop: "10px" }} key={key}>{text}</a>
+  return (
+    <div style={{ paddingTop: "10px" }}>
+      <a style={{ align: "left" }} key={key}>
+        {text}
+      </a>
+    </div>
+  )
 }
 
 const Type = ({
   type: typeFromInitialProps,
   data: dataFromInitialProps,
-  totalPages: totalPagesFromInitialProps
+  totalPages: totalPagesFromInitialProps,
+  currentPage: currentPageFromInitialProps
 }) => {
   const [type, setType] = useState(typeFromInitialProps)
   const [data, setData] = useState(dataFromInitialProps)
   const [totalPages, setTotalPages] = useState(totalPagesFromInitialProps)
+  const [currentPage, setCurrentPage] = useState(currentPageFromInitialProps)
 
   useEffect(() => {
     setData(dataFromInitialProps)
   }, [dataFromInitialProps])
+
+  const handleClickPage = (val) => {
+    setCurrentPage(val)
+  }
 
   return (
     <div className={styles.container}>
@@ -31,27 +43,40 @@ const Type = ({
       </Head>
       <img src="https://www.logo.wine/a/logo/Star_Wars/Star_Wars-Logo.wine.svg" width="200"  alt="Star Wars logo" />
       <main className={styles.main}>
-        {
-          data.map(d => {
-            const container = type === "films" ? <Card key={d.title} text={d.title} />
-              : type === "people" ? <Card key={d.name} text={d.name} />
-              : <Card key={d.name} text={d.name} />
+        <div style={{ width: "300px" }}>
+          {
+            data.length > 0 ? data.map(d => {
+              const container = type === "films" ? <Card key={d.title} text={d.title} />
+                : type === "people" ? <Card key={d.name} text={d.name} />
+                : <Card key={d.name} text={d.name} />
 
-            return container
-          })
-        }
+              return container
+            }) : <a>Loading...</a>
+          }
+        </div>
       </main>
         <div style={{ paddingBottom: "20px" }}>
           {
             totalPages > 1 && [...Array(totalPages)].map((x,i) => {
               const as = `/cat/${type}?page=${i+1}`
-              return <Link href={as}><a style={{ display: "inline", padding: "5px" }}>{i+1}</a></Link>
+              const fontWeight = i+1 === currentPage ? "bold" : "normal"
+
+              return (
+                <Link href={as}>
+                  <a
+                    style={{ display: "inline", padding: "5px", fontWeight: fontWeight }}
+                    onClick={() => handleClickPage(i+1)}
+                    >
+                      {i+1}
+                    </a>
+                </Link>
+              )
             })
           }
-          <Link href="/"><a style={{ display: "inline", padding: "5px"}}>Back</a></Link>
+          <Link href="/"><a style={{ display: "inline", padding: "5px"}}>Home</a></Link>
         </div>
       <footer className={styles.footer}>
-        <a>SZ</a>
+        <a>SZ X KT</a>
       </footer>
     </div>
   )
@@ -70,7 +95,8 @@ Type.getInitialProps = async ({ req, res, query }) => {
   return ({
     type: query.type,
     data: data,
-    totalPages: totalPages
+    totalPages: totalPages,
+    currentPage: !page ? 1 : Number(page)
   })
 }
 
