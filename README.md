@@ -23,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 3. Axios: HTTP client, to make API call.
 4. React icons: Well...icons for ReactJS.
 
-## If I'm going to spend more time on this project, I would.
+## If I'm going to spend more time on this project, I would:
 1. Make real API calls to edit and delete listing. Since I can only make a GET request to https://swapi.dev/api, editing and deleting item in list was only a mock. It only alters the array in memory, not in real DB. However, if the API is available, it can easily be done since the foundation was there already.
 2. I will start with designing the UI first. A proper one, with bell and whistle. After that only I will start the development.
 3. I will use Material UI. I was about to use MUI in this project, but, since I don't have much time to configure it, I have to pass.
