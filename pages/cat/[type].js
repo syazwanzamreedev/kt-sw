@@ -7,10 +7,10 @@ import styles from '../../styles/Home.module.css'
 
 const Card = ({ key, text }) => { // create Card in components folder for reusability. Import here.
   return (
-    <div style={{ paddingTop: "10px" }}>
-      <a style={{ align: "left" }} key={key}>
-        {text}
-      </a>
+    <div style={{ paddingTop: "10px", display: "flex", flexDirection: "row", flexWrap: "nowrap", justifyContent: "space-between" }}>
+      <div style={{ width: "70%"}}>{text}</div>
+      <div style={{ width: "15%", textAlign: "center" }}>edit</div>
+      <div style={{ width: "15%", textAlign: "center"  }}>delete</div>
     </div>
   )
 }
@@ -43,7 +43,7 @@ const Type = ({
       </Head>
       <img src="https://www.logo.wine/a/logo/Star_Wars/Star_Wars-Logo.wine.svg" width="200"  alt="Star Wars logo" />
       <main className={styles.main}>
-        <div style={{ width: "300px" }}>
+        <div style={{ maxWidth: "500px" }}>
           {
             data.length > 0 ? data.map(d => {
               const container = type === "films" ? <Card key={d.title} text={d.title} />
